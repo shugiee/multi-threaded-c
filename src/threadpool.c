@@ -8,7 +8,8 @@ void threadpool_function(void *threadpool) {
     threadpool_t *pool = (threadpool_t *)threadpool;
 
     while (1) {
-        // Lock the entire structure!
+        // Lock the `lock` field. We treat this as the lock for the whole object
+        // though
         pthread_mutex_lock(&(pool->lock));
 
         // If there is nothing in the queue, wait to be notified
