@@ -18,6 +18,7 @@ typedef struct {
     pthread_cond_t notify;
     pthread_t threads[THREADS];
     task_t task_queue[QUEUE_SIZE];
+    int queue_size;
     int queued;
     int queue_front;
     int queue_back;
@@ -27,7 +28,7 @@ typedef struct {
 // Function declarations
 void threadpool_init(threadpool_t *pool);
 void threadpool_destroy(threadpool_t *pool);
-void threadpool_add_task(threadpool_t *pool);
+void threadpool_add_task(threadpool_t *pool, void (*fn)(void *), void *arg);
 void example_task(void *arg);
 
 #endif // THREADPOOL_H
